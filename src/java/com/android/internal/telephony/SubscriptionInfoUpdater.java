@@ -119,6 +119,7 @@ public class SubscriptionInfoUpdater extends Handler {
     // The current foreground user ID.
     private int mCurrentlyActiveUserId;
     private CarrierServiceBindHelper mCarrierServiceBindHelper;
+    private int mCurrentSimCount;
 
     public SubscriptionInfoUpdater(
             Looper looper, Context context, Phone[] phone, CommandsInterface[] ci) {
@@ -710,6 +711,8 @@ public class SubscriptionInfoUpdater extends Handler {
             }
         }
 
+        mCurrentSimCount = insertedSimCount;
+
         // Ensure the modems are mapped correctly
         mSubscriptionManager.setDefaultDataSubId(
                 mSubscriptionManager.getDefaultDataSubscriptionId());
@@ -832,6 +835,10 @@ public class SubscriptionInfoUpdater extends Handler {
             }
         }
         return -1;
+    }
+
+    protected int getInsertedSimCount() {
+        return mCurrentSimCount;
     }
 
     private boolean isNewSim(String iccId, String[] oldIccId) {
