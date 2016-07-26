@@ -289,7 +289,11 @@ public class GsmCdmaPhone extends Phone {
             tm.setPhoneType(getPhoneId(), PhoneConstants.PHONE_TYPE_GSM);
             mIccCardProxy.setVoiceRadioTech(ServiceState.RIL_RADIO_TECHNOLOGY_UMTS);
         } else {
+<<<<<<< HEAD
             handleCdmaSubscriptionSource(mCdmaSSM.getCdmaSubscriptionSource());
+=======
+            mCdmaSubscriptionSource = mCdmaSSM.getCdmaSubscriptionSource();
+>>>>>>> 7d87381... Get default from CdmaSubscriptionSourceManager
             // This is needed to handle phone process crashes
             mIsPhoneInEcmState = getInEcmMode();
             if (mIsPhoneInEcmState) {
