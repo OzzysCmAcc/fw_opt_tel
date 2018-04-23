@@ -123,6 +123,7 @@ public class GsmCdmaPhone extends Phone {
     public static final int RESTART_ECM_TIMER = 0; // restart Ecm timer
     public static final int CANCEL_ECM_TIMER = 1; // cancel Ecm timer
     private CdmaSubscriptionSourceManager mCdmaSSM;
+    public int mCdmaSubscriptionSource = CdmaSubscriptionSourceManager.SUBSCRIPTION_SOURCE_UNKNOWN;
     public EriManager mEriManager;
     private PowerManager.WakeLock mWakeLock;
     // mEriFileLoadedRegistrants are informed after the ERI text has been loaded
@@ -143,6 +144,7 @@ public class GsmCdmaPhone extends Phone {
     };
     public static final String PROPERTY_CDMA_HOME_OPERATOR_NUMERIC =
             "ro.cdma.home.operator.numeric";
+    private static final String DUMMY_NV_ICC_SERIAL = "DUMMY_NV_ICC_SERIAL";
 
     //CDMALTE
     /** PHONE_TYPE_CDMA_LTE in addition to RuimRecords needs access to SIMRecords and
@@ -2403,10 +2405,6 @@ public class GsmCdmaPhone extends Phone {
 
             case EVENT_NV_READY:
                 Rlog.d(LOG_TAG, "Event EVENT_NV_READY Received");
-                SubscriptionInfoUpdater subscriptionInfoUpdater = PhoneFactory.getSubscriptionInfoUpdater();
-                if (subscriptionInfoUpdater != null) {
-                    subscriptionInfoUpdater.updateSubIdForNV(mPhoneId);
-                }
                 break;
 
             case EVENT_SET_VM_NUMBER_DONE:
